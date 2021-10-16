@@ -11,7 +11,7 @@ import (
 func NewStartCommand() *cobra.Command {
 	cmd := &cobra.Command{
 		Use:   "start",
-		Short: "Run the IAM-Authorize Server",
+		Short: "start the sample application",
 		Run: func(cmd *cobra.Command, args []string) {
 			start()
 		},
