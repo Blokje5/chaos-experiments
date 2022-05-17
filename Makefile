@@ -15,3 +15,20 @@ venv:
 .PHONY: install
 install: venv
 	@$(ACTIVATE); $(PYTHON_INTERPRETER) -m pip install --upgrade pip; $(PIP) install -r requirements.txt
+
+.PHONY: cluster
+cluster:
+	kind create cluster --config kind.yaml --name chaos-experiments
+
+.PHONY: clean
+clean:
+	kind delete cluster --name chaos-experiments
+
+.PHONY: load-image
+load-image:
+	@docker build -t basic:0.0.1 .
+	@kind load docker-image basic:0.0.1 --name chaos-experiments
+
+.PHONY: deploy-basic
+deploy-basic:
+	@kubectl apply -f sample-applications/basic/infra/basic_with_issue.yaml
