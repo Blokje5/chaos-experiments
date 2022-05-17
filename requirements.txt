@@ -1,1 +1,1 @@
-chaostoolkit==1.10.0
+chaostoolkit==1.12.0

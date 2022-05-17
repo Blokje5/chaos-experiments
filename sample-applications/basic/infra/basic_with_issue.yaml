@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: basic
+  labels:
+    app: basic
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: basic
+  template:
+    metadata:
+      labels:
+        app: basic
+    spec:
+      containers:
+      - name: basic
+        image: basic:0.0.1
+        imagePullPolicy: Never
+        args: ["start"]
+        ports:
+        - containerPort: 8080
+          hostPort: 8080
