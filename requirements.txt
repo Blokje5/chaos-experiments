@@ -1,1 +1,2 @@
 chaostoolkit==1.12.0
+chaostoolkit-kubernetes==0.26.2
