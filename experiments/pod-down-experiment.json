@@ -1,0 +1,40 @@
+{
+    "title": "What happens if a pod is suddenly unavailable with the basic app?",
+    "description": "If a pod becomes available, the app should still be available",
+    "tags": ["basic", "kubernetes"],
+    "steady-state-hypothesis": {
+        "title": "The basic app responds",
+        "probes": [
+            {
+                "type": "probe",
+                "name": "we-can-make-requests",
+                "tolerance": 200,
+                "provider": {
+                    "type": "http",
+                    "timeout": 3,
+                    "verify_tls": false,
+                    "url": "http://localhost/"
+                }
+            }
+        ]
+    },
+    "method": [
+        {
+            "type": "action",
+            "name": "terminate-app-pod",
+            "provider": {
+                "type": "python",
+                "module": "chaosk8s.pod.actions",
+                "func": "terminate_pods",
+                "arguments": {
+                    "label_selector": "app=basic",
+                    "qty": 1,
+                    "rand": true
+                }
+            },
+            "pauses": {
+                "after": 1
+            }
+        }
+    ]
+}

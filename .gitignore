@@ -1,2 +1,6 @@
 venv
 .vscode
+
+# chaostoolkit
+chaostoolkit.log
+journal.json
