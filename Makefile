@@ -21,6 +21,9 @@ install: venv
 run-basic:
 	@$(ACTIVATE); chaos run experiments/pod-down-experiment.json
 
+run-node-maintenance:
+	@$(ACTIVATE); chaos run experiments/node-maintenance-experiment.json
+
 ### Infra ###
 
 .PHONY: cluster
