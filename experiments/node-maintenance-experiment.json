@@ -1,0 +1,45 @@
+{
+    "title": "What happens to the basic app if we perform node maintenance",
+    "description": "If a node is undergoing maintenance, the app should still respond",
+    "tags": [
+        "basic",
+        "kubernetes"
+    ],
+    "steady-state-hypothesis": {
+        "title": "The basic app responds",
+        "probes": [
+            {
+                "type": "probe",
+                "name": "we-can-make-requests",
+                "tolerance": 200,
+                "provider": {
+                    "type": "http",
+                    "timeout": 3,
+                    "verify_tls": false,
+                    "url": "http://localhost/"
+                }
+            }
+        ]
+    },
+    "method": [
+        {
+            "name": "drain-nodes",
+            "type": "action",
+            "provider": {
+                "type": "python",
+                "module": "chaosk8s.node.actions",
+                "count": 1,
+                "func": "drain_nodes"
+            }
+        },
+        {
+            "name": "uncordon-node",
+            "type": "action",
+            "provider": {
+              "type": "python",
+              "module": "chaosk8s.node.actions",
+              "func": "uncordon_node"
+            }
+          }
+    ]
+}

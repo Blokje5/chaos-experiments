@@ -1,2 +1,4 @@
 chaostoolkit==1.12.0
 chaostoolkit-kubernetes==0.26.2
+# Pin Kubernetes Library version to Kind node version to avoid conflicts with API
+kubernetes==v21.7.0
